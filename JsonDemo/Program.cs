@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Json;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace JsonDemo
 {
     class Program
     {
+        class Mens
+        {
+            public string Naam { get; set; }
+            public int Leeftijd { get; set; }
+        }
+
         static void Main(string[] args)
         {
-            var a1 = new JsonArray();
-            a1.Add("Jos");
-            a1.Add("Jan");
-            Console.WriteLine(a1.ToString());
+            var mensen = new List<Mens>()
+            {
+                { new Mens { Naam = "Jan", Leeftijd = 30 } },
+                { new Mens { Naam = "Jos", Leeftijd = 31 } },
+                { new Mens { Naam = "Willy", Leeftijd = 32 } },
+                { new Mens { Naam = "Hippoliet", Leeftijd = 29 } },
+            };
 
-            var o1 = new JsonObject();
-            o1.Add("Naam", "Jos");
-            o1.Add("Leeftijd", "30");
-            Console.WriteLine(o1.ToString());
-
-            var a2 = new JsonArray() { "Willy", "Hippoliet" };
-            Console.WriteLine(a2.ToString());
-
-            a1.Add(o1);
-            a1.Insert(2, a2);
-
-            Console.WriteLine();
-            Console.WriteLine(a1.ToString());
+            var str = JsonConvert.SerializeObject(mensen, Formatting.Indented);
+            Console.WriteLine(str);
         }
     }
 }

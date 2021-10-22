@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace JsonDemo
 {
@@ -22,8 +22,11 @@ namespace JsonDemo
                 { new Mens { Naam = "Hippoliet", Leeftijd = 29 } },
             };
 
-            var str = JsonConvert.SerializeObject(mensen, Formatting.Indented);
+            var str = JsonSerializer.Serialize(mensen);
             Console.WriteLine(str);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            Console.WriteLine(JsonSerializer.Serialize(mensen, options));
         }
     }
 }
